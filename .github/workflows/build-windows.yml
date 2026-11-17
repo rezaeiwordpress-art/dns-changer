@@ -24,6 +24,9 @@ jobs:
       - name: Install Node dependencies
         run: npm install --include=optional --no-audit --no-fund
 
+      - name: Install Tauri Windows CLI binary
+        run: npm install --no-save --package-lock=false @tauri-apps/cli-win32-x64-msvc@2.12.4
+
       - name: Setup Rust
         shell: powershell
         run: |
