@@ -1023,10 +1023,10 @@ impl PowerShellNetworkBackend {
 
             let stdout = String::from_utf8_lossy(&stdout_bytes)
                 .trim_start_matches('\u{feff}')
-                .into_owned();
+                .to_owned();
             let stderr = String::from_utf8_lossy(&stderr_bytes)
                 .trim_start_matches('\u{feff}')
-                .into_owned();
+                .to_owned();
 
             if !status.success() {
                 let code = status.code().unwrap_or(-1);
