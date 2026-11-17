@@ -1,0 +1,6 @@
+{
+  "name": "DNS Changer",
+  "description": "Windows desktop DNS management engine built with Tauri 2, Rust, React, and TypeScript.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
