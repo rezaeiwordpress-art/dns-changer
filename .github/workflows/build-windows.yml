@@ -20,8 +20,8 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Install Node dependencies
-        run: npm ci
+- name: Install Node dependencies
+  run: npm install --include=optional --no-audit --no-fund
 
       - name: Setup Rust
         shell: powershell
