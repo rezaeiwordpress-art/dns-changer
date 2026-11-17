@@ -1,0 +1,43 @@
+name: Build Windows EXE
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Setup Rust
+        shell: powershell
+        run: |
+          rustup toolchain install stable
+          rustup default stable
+
+      - name: Build Tauri application
+        run: npm run tauri build
+
+      - name: Upload EXE and installers
+        uses: actions/upload-artifact@v4
+        with:
+          name: DNS-Changer-Windows
+          path: |
+            src-tauri/target/release/dns-changer.exe
+            src-tauri/target/release/bundle/nsis/*.exe
+            src-tauri/target/release/bundle/msi/*.msi
+          if-no-files-found: error
